@@ -34,11 +34,12 @@ app.get("/", (req, res) => {
   return res.json({ message: "Welcome to Furnished Housing app API...." });
 });
 
-const PORT = 7000;
+// Using the PORT environment variable provided by Render, with a fallback
+const PORT = process.env.PORT || 7000;
 
 mongoose
   .connect(process.env.MONGO_URL)
-  .then(console.log("Connection with database Successfull"))
+  .then(() => console.log("Connection with database Successful"))
   .catch((error) => {
     console.log(error.message);
   });
@@ -52,6 +53,6 @@ const runAllFuns = async () => {
 
 runAllFuns();
 
-app.listen(PORT, () => {
-  console.log(`server running at PORT ${PORT}`);
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Server running at PORT ${PORT}`);
 });
